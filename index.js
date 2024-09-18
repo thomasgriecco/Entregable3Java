@@ -45,3 +45,29 @@ const pizzas = [
     imagen: "./img/anana.png",
   },
 ];
+
+const buscarPizzaBtn = document.getElementById("buscarPizza");
+const resultado = document.getElementById("resultado");
+
+buscarPizzaBtn.addEventListener("click", () => {
+ 
+  const pizzaId = Number(document.getElementById("pizzaId").value);
+ 
+  resultado.innerHTML = "";
+
+  const pizzaEncontrada = pizzas.find((pizza) => pizza.id === pizzaId);
+
+  if (pizzaEncontrada) {
+    
+    const card = `
+      <div class="card">
+        <img src="${pizzaEncontrada.imagen}" alt="${pizzaEncontrada.nombre}">
+        <h3>${pizzaEncontrada.nombre}</h3>
+        <p>Precio: $${pizzaEncontrada.precio}</p>
+      </div>
+    `;
+    resultado.innerHTML = card;
+  } else {
+    resultado.innerHTML = `<p class="error">No se encontró ninguna pizza con ese ID</p>`;
+  }
+});
